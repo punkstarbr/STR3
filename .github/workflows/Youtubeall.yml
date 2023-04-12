@@ -21,7 +21,7 @@ jobs:
           pip install -r requirements.txt
       - name: Install Selenium
         run: |
-          pip install selenium
+          pip install selenium yt_dlp
 
       - name: Execute Python script
         run: | 
