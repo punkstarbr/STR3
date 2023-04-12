@@ -23,10 +23,18 @@ banner = r'''
 subprocess.run(['pip', 'install', '--upgrade', 'yt-dlp'])
 
 # Define options for yt-dlp
-ydl_opts = {
+ydl_opts_yt_dlp = {
     'format': 'best',  # Get the best quality
 
     'write_all_thumbnails': False,  # Don't download thumbnails
+    'skip_download': True,  # Don't download the video
+}
+
+# Define options for youtube-dl
+ydl_opts_youtube_dl = {
+    'format': 'best',  # Get the best quality
+
+    'writethumbnail': False,  # Don't download thumbnails
     'skip_download': True,  # Don't download the video
 }
 
@@ -37,10 +45,10 @@ try:
         f.write(banner)
         for i, link in enumerate(links):
             try:
-                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                with yt_dlp.YoutubeDL(ydl_opts_yt_dlp) as ydl:
                     info = ydl.extract_info(link, download=False)
             except yt_dlp.utils.DownloadError:
-                with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                with youtube_dl.YoutubeDL(ydl_opts_youtube_dl) as ydl:
                     info = ydl.extract_info(link, download=False)
             except Exception as e:
                 print(f"Error processing the link {link}: {e}")
@@ -59,3 +67,4 @@ try:
             f.write("\n")
 except Exception as e:
     print(f"Error creating the .m3u8 file: {e}")
+
