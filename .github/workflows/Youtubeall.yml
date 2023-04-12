@@ -28,6 +28,8 @@ jobs:
       - name: Install pytube
         run: pip install pytube
 
+      - name: Install youtube-dl
+        run: pip install youtube-dl
 
       - name: Execute Python script
         run: | 
