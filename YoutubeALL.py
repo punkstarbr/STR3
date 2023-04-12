@@ -52,7 +52,6 @@ try:
             if 'url' not in info:
                 print(f"Error writing video information for {link}: 'url'")
                 continue
-            channel = info['channel']
             url = info['url']
             thumbnail_url = info['thumbnail']
             description = info.get('description', '')[:10]
