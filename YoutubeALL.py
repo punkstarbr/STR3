@@ -24,11 +24,11 @@ subprocess.run(['pip', 'install', '--upgrade', 'youtube_dl'])
 
 # Define options for yt-dlp and youtube-dl
 ydl_opts = {
-    'format': 'best',  # Obtém a melhor qualidade
-
-    'write_all_thumbnails': False,  # Não faz download das thumbnails
-    'skip_download': True,  # Não faz download do vídeo
+    'format': ['bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]', 'best'],  # Get the best quality, either in mp4 format or the best available regardless of format
+    'write_all_thumbnails': False,  # Don't download thumbnails
+    'skip_download': True,  # Don't download the video
 }
+
 
 # Get the playlist and write to file
 try:
