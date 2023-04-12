@@ -2,7 +2,7 @@ name: Youtube ALL
 
 on:
   schedule:
-    - cron: '0 0,8,16 * * *' # run at midnight, 8am, and 4pm UTC
+    - cron: '0 */2 * * *' # run every 2 hours
   push:
     branches:
       - main
