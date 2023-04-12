@@ -5,20 +5,17 @@
 #EXTM3U x-tvg-url="https://raw.githubusercontent.com/K-vanc/Tempest-EPG-Generator/main/Siteconfigs/Argentina/%5BENC%5D%5BEX%5Delcuatro.com_0.channel.xml"
 #EXTM3U x-tvg-url="https://raw.githubusercontent.com/Nicolas0919/Guia-EPG/master/GuiaEPG.xml"
 #EXTINF:-1 group-title="YOUTUBE"  tvg-logo="https://www.iol.pt/multimedia/oratvi/multimedia/imagem/id/6408b92f0cf2665294d9124c/",12 de abril - ...
-https://video-auth2.iol.pt/live_tvi/live_tvi/edge_servers/tvi-720_passthrough/chunks.m3u8?nimblesessionid=707995903&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI0OjUgUE0maGFzaF92YWx1ZT0zbVVFZXM5ckVVSUQ5M2J2ZXJEUWhRPT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9MTBmMjgxZTMtMDE4MS00MGZjLWFlMDYtZDJmMTE2NjI2NTdh
+https://video-auth2.iol.pt/live_tvi/live_tvi/edge_servers/tvi-720_passthrough/chunks.m3u8?nimblesessionid=707996515&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI1OjQ0IFBNJmhhc2hfdmFsdWU9c01odzlaajhWS3hnVjdiOUM5cGFMdz09JnZhbGlkbWludXRlcz0xNDQwJmlkPTFmMDM4M2M5LTFiMDItNDgzZC05YTExLWM2MDczMjQ5YTJiNA==
 
 #EXTINF:-1 group-title="YOUTUBE"  tvg-logo="https://www.iol.pt/multimedia/oratvi/multimedia/imagem/id/61e801cf0cf21a10a41a71af/",CNN Prime Time - ...
-https://video-auth7.iol.pt/live_cnn/live_cnn/edge_servers/cnn-720p/chunks.m3u8?nimblesessionid=248199254&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI0OjggUE0maGFzaF92YWx1ZT1TWm4rWHM5K0JDK1VEQlRPTlFpejVRPT0mdmFsaWRtaW51dGVzPTE0NDAmaWQ9YTNhYTY4ODYtN2YwYS00YTZiLTk2YTgtNWNmODc5ZTMyYmM1
+https://video-auth2.iol.pt/live_cnn/live_cnn/edge_servers/cnn-720p/chunks.m3u8?nimblesessionid=707996529&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI1OjQ2IFBNJmhhc2hfdmFsdWU9ejNPd1lleWlaUnpHWGxvWlNONDdyUT09JnZhbGlkbWludXRlcz0xNDQwJmlkPWE1MTc1ZjExLTVlM2MtNDk0NC05Yzk1LTUxOTExOWUzZGIwNg==
 
 #EXTINF:-1 group-title="YOUTUBE"  tvg-logo="https://www.iol.pt/multimedia/oratvi/multimedia/imagem/id/58762b850cf20a4864595bbc/",Os Batanetes - ...
-https://video-auth7.iol.pt/live_tvi_ficcao/live_tvi_ficcao/edge_servers/tvificcao-720p/chunks.m3u8?nimblesessionid=248199290&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI0OjE3IFBNJmhhc2hfdmFsdWU9czFGTmJGblRtdTJTV0xVOUN0TmJPZz09JnZhbGlkbWludXRlcz0xNDQwJmlkPWI0MTgwZGU1LTBlYjEtNDkzZC04ZjQ4LTZiNTkxNTU5YjE3OQ==
+https://video-auth1.iol.pt/live_tvi_ficcao/live_tvi_ficcao/edge_servers/tvificcao-720p/chunks.m3u8?nimblesessionid=1036198039&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI1OjUyIFBNJmhhc2hfdmFsdWU9aWtMSVBQZWxrdHI5UjlZNDVQS2ZJQT09JnZhbGlkbWludXRlcz0xNDQwJmlkPTZlMjUyOTJlLThkOGUtNDc1NS1iNGMxLWQ2NGFiMjVhNWRjMQ==
 
 #EXTINF:-1 group-title="YOUTUBE"  tvg-logo="https://www.iol.pt/multimedia/oratvi/multimedia/imagem/id/643693650cf2cf9225021ad0/",Cláudio Ramos emociona-se: «Sei que o que vou dizer pode ser um bocadinho polémico» - ...
-https://streaming-vod1.iol.pt/vod/_definst_/1/9/9/a/smil:64368f6c0cf2cf922502199a-L/chunklist_w686690227_b2500000.m3u8?nimblesessionid=668141842&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI0OjIwIFBNJmhhc2hfdmFsdWU9KytPZ0M0SWNNK2U4bFBJVDhnMi9zQT09JnZhbGlkbWludXRlcz0xNDQwJmlkPWE1MGYyMDM2LTllYTktNGQ5Yy1iMTliLWMwOTY1ZjA3YmMxMw==
+https://streaming-vod2.iol.pt/vod/_definst_/1/9/9/a/smil:64368f6c0cf2cf922502199a-L/chunklist_w845682043_b2500000.m3u8?nimblesessionid=351719496&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI1OjU0IFBNJmhhc2hfdmFsdWU9WHp3L0tMZm1RcGlRUHJKWVJJTFA5dz09JnZhbGlkbWludXRlcz0xNDQwJmlkPTFhN2QxNmQzLWQ5ODAtNGIyYi05OWJlLTViMjkxZDNlNzMxNw==
 
 #EXTINF:-1 group-title="YOUTUBE"  tvg-logo="https://www.iol.pt/multimedia/oratvi/multimedia/imagem/id/643199a00cf2665294de10b9/",Bruna Gomes responde a pergunta polémica: Nunca ter conhecido o Bernardo ou apagar as contas das redes sociais? Veja a resposta! - ...
-https://streaming-vod1.iol.pt/vod/_definst_/7/3/9/4/smil:643195160cf2c84d7fd07394-L/chunklist_w1996624705_b2500000.m3u8?nimblesessionid=668141910&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI0OjI1IFBNJmhhc2hfdmFsdWU9b3BmbW1mdUc5SVE0UXRsanBseUFYdz09JnZhbGlkbWludXRlcz0xNDQwJmlkPWI0YTdmNGFjLWMwMGQtNGM5ZS1iNTY5LWU3MDEzNDRjMWIwMA==
-
-#EXTINF:-1 group-title="YOUTUBE"  tvg-logo="https://www.iol.pt/multimedia/oratvi/multimedia/imagem/id/64366fcf0cf2665294de99f6/",O Triângulo - Extra - 11 de abril de 2023 - ...
-https://streaming-vod1.iol.pt/vod/_definst_/9/5/0/e/smil:643613180cf2665294de950e-L/chunklist_w141076583_b2000000.m3u8?nimblesessionid=668141998&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI0OjMwIFBNJmhhc2hfdmFsdWU9L1pTMm1vQ1I4TlNEcjhSbCsrNThUQT09JnZhbGlkbWludXRlcz0xNDQwJmlkPTViNzkyMTUyLWUxY2ItNGIyMC1iMTM4LTlhNmRiOWY2MTM1ZA==
+https://streaming-vod2.iol.pt/vod/_definst_/7/3/9/4/smil:643195160cf2c84d7fd07394-L/chunklist_w1022139091_b2500000.m3u8?nimblesessionid=351719579&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMi8yMDIzIDEwOjI1OjU4IFBNJmhhc2hfdmFsdWU9QUVPYmI3enI4MDVDemdhbSsrV0lKUT09JnZhbGlkbWludXRlcz0xNDQwJmlkPWU3ZGY5NTRkLWZmYzAtNDllYi05NjRkLTU5N2IyMTk4ODE5MA==
 
