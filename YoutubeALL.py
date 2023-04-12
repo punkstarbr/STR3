@@ -1,5 +1,4 @@
 import subprocess
-import time
 import os
 import yt_dlp
 import youtube_dl
@@ -19,23 +18,15 @@ banner = r'''
 #EXTM3U x-tvg-url="https://raw.githubusercontent.com/Nicolas0919/Guia-EPG/master/GuiaEPG.xml"
 '''
 
-# Install yt-dlp
+# Install yt-dlp and youtube-dl
 subprocess.run(['pip', 'install', '--upgrade', 'yt-dlp'])
+subprocess.run(['pip', 'install', '--upgrade', 'youtube_dl'])
 
-# Define options for yt-dlp
-ydl_opts_yt_dlp = {
-    'format': 'best',  # Obtém a melhor qualidade
+# Define options for yt-dlp and youtube-dl
+ydl_opts = {
+    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',  # Get the best quality in mp4 format
 
-    'write_all_thumbnails': False,  # Não faz download das thumbnails
-    'skip_download': True,  # Não faz download do vídeo
-}
-
-
-# Define options for youtube-dl
-ydl_opts_youtube_dl = {
-    'format': 'best',  # Get the best quality
-
-    'writethumbnail': False,  # Don't download thumbnails
+    'write_all_thumbnails': False,  # Don't download thumbnails
     'skip_download': True,  # Don't download the video
 }
 
@@ -46,19 +37,21 @@ try:
         f.write(banner)
         for i, link in enumerate(links):
             try:
-                with yt_dlp.YoutubeDL(ydl_opts_yt_dlp) as ydl:
-                    info = ydl.extract_info(link, download=False)
-            except yt_dlp.utils.DownloadError:
-                with youtube_dl.YoutubeDL(ydl_opts_youtube_dl) as ydl:
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                     info = ydl.extract_info(link, download=False)
             except Exception as e:
-                print(f"Error processing the link {link}: {e}")
-                continue
+                print(f"yt-dlp failed for link {link}: {e}")
+                print("Trying with youtube-dl...")
+                try:
+                    with youtube_dl.YoutubeDL(ydl_opts) as ydl_backup:
+                        info = ydl_backup.extract_info(link, download=False)
+                except Exception as e_backup:
+                    print(f"youtube-dl failed for link {link}: {e_backup}")
+                    continue
 
             if 'url' not in info:
                 print(f"Error writing video information for {link}: 'url'")
                 continue
-
             url = info['url']
             thumbnail_url = info['thumbnail']
             description = info.get('description', '')[:10]
@@ -67,5 +60,4 @@ try:
             f.write(f"{url}\n")
             f.write("\n")
 except Exception as e:
-    print(f"Error creating the .m3u8 file: {e}")
-
+    print(f"Error creating the .m3u file: {e}")
