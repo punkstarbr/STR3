@@ -19,9 +19,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Install Selenium
+      - name: Install Selenium e outros
         run: |
-          pip install selenium yt_dlp
+          pip install selenium yt_dlp pytube
 
       - name: Execute Python script
         run: | 
