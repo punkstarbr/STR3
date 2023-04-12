@@ -52,11 +52,12 @@ try:
             if 'url' not in info:
                 print(f"Error writing video information for {link}: 'url'")
                 continue
+            channel = info['channel']
             url = info['url']
             thumbnail_url = info['thumbnail']
             description = info.get('description', '')[:10]
             title = info.get('title', '')
-            f.write(f"#EXTINF:-1 group-title=\"YOUTUBE\" tvg-logo=\"{thumbnail_url}\",{title} - {description}...\n")
+            f.write(f"#EXTINF:-1 group-title=\"YOUTUBE\"  tvg-id=\"{channel}\" tvg-logo=\"{thumbnail_url}\",{title} - {description}...\n")
             f.write(f"{url}\n")
             f.write("\n")
 except Exception as e:
