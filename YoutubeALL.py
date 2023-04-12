@@ -24,11 +24,12 @@ subprocess.run(['pip', 'install', '--upgrade', 'yt-dlp'])
 
 # Define options for yt-dlp
 ydl_opts_yt_dlp = {
-    'format': 'best',  # Get the best quality
+    'format': 'best',  # Obtém a melhor qualidade
 
-    'write_all_thumbnails': False,  # Don't download thumbnails
-    'skip_download': True,  # Don't download the video
+    'write_all_thumbnails': False,  # Não faz download das thumbnails
+    'skip_download': True,  # Não faz download do vídeo
 }
+
 
 # Define options for youtube-dl
 ydl_opts_youtube_dl = {
