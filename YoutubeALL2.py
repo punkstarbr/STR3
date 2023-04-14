@@ -8,7 +8,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 import yt_dlp
 
 
-
 from pytube import YouTube
 
 # Ler os links do arquivo LINKSYOUTUBE.txt
