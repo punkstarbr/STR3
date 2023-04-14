@@ -1,6 +1,6 @@
-import yt_dlp
+import youtube_dl
 
-# Define options for yt-dlp
+# Define options for youtube-dl
 ydl_opts = {
     'format': 'best',  # Selects the best quality available
     'outtmpl': '%(title)s.%(ext)s',  # Output filename template
@@ -9,11 +9,21 @@ ydl_opts = {
 }
 
 # Create a YoutubeDL object with the options
-ydl = yt_dlp.YoutubeDL(ydl_opts)
+ydl = youtube_dl.YoutubeDL(ydl_opts)
 
 # List the available formats for the video
 try:
     with ydl:
-        ydl.extract_info('https://vimeo.com/817420828', download=False)
-except yt_dlp.utils.DownloadError as e:
-    print(f"yt-dlp failed for link https://vimeo.com/817420828: {e}")
+        info = ydl.extract_info('https://vimeo.com/817420828', download=False)
+        formats = info['formats']
+        for f in formats:
+            print(f['format_id'], f['ext'], f['format_note'])
+except youtube_dl.DownloadError as e:
+    print(f"youtube-dl failed for link https://vimeo.com/817420828: {e}")
+
+# Download the video
+try:
+    with ydl:
+        ydl.download(['https://vimeo.com/817420828'])
+except youtube_dl.DownloadError as e:
+    print(f"youtube-dl failed for link https://vimeo.com/817420828: {e}")
