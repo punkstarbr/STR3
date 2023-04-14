@@ -16,13 +16,13 @@ def is_channel_working(url, headers=None):
             "-"
         ]
 
-        process = subprocess.run(cmd, stderr=subprocess.PIPE, universal_newlines=True, timeout=30)
+        process = subprocess.run(cmd, stderr=subprocess.PIPE, universal_newlines=True, timeout=5)
         return process.returncode == 0
     except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
         return False
 
 repo_urls = [
-    "https://github.com/punkstarbr/STR-YT/raw/main/REALITY'SLIVE.m3u"
+    "https://github.com/LITUATUI/M3UPT/raw/main/M3U/M3UPT.m3u"
 ]
 
 working_channels = []
