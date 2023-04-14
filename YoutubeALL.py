@@ -8,7 +8,7 @@ import re
 
 def search_image_url(channel_name):
     query = f"{channel_name} logo filetype:png OR filetype:jpg"
-    search_url = f"https://www.google.com/search?q={query}&tbm=isch"
+    search_url = f"https://www.google.com/search?q={query}&hl=pt-BR&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiYhte-nqn-AhXoHrkGHdt-D58Q_AUoAXoECAEQAw&biw=1600&bih=711&dpr=1"
 
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
