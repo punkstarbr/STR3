@@ -31,6 +31,11 @@ jobs:
       - name: Install youtube-dl
         run: pip install youtube-dl
 
+      - name: Install pip install beautifulsoup4
+        run: pip install beautifulsoup4
+      
+      - name: Install pip install lxml
+        run: pip install lxml
 
       - name: Install ffmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
