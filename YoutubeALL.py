@@ -5,10 +5,11 @@ import subprocess
 import os
 from bs4 import BeautifulSoup
 import re
+import json
 
 def search_image_url(channel_name):
     query = f"{channel_name} logo filetype:png OR filetype:jpg"
-    search_url = f"https://www.google.com/search?q={query}&hl=pt-BR&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiYhte-nqn-AhXoHrkGHdt-D58Q_AUoAXoECAEQAw&biw=1600&bih=711&dpr=1"
+    search_url = f"https://www.google.com/search?q={query}&tbm=isch"
 
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
@@ -16,14 +17,19 @@ def search_image_url(channel_name):
     response = requests.get(search_url, headers=headers)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, "lxml")
-        img_tags = soup.find_all("img")
-        
-        for img_tag in img_tags:
-            img_url = img_tag.get("src")
-            if img_url and re.match(r'^https?://', img_url) and "gstatic.com" not in img_url:
-                return img_url
-                
+        for script in soup.find_all("script"):
+            if "AF_initDataCallback" in script.text:
+                json_str = re.search(r"AF_initDataCallback\((.*?)\);", script.string, re.DOTALL).group(1)
+                json_data = json.loads(json_str[json_str.index('{'):json_str.rindex('}')+1])
+                if 'ds:0' in json_data:
+                    results = json_data['ds:0']['data'][0]['Result']
+                    for result in results:
+                        if 'iurl' in result:
+                            img_url = result['iurl']
+                            if img_url and "gstatic.com" not in img_url:
+                                return img_url
     return None
+
 
 
 
