@@ -5,9 +5,10 @@ import subprocess
 import os
 from bs4 import BeautifulSoup
 
+import re
 
 def search_image_url(channel_name):
-    query = f"{channel_name} logo"
+    query = f"{channel_name} logo filetype:png OR filetype:jpg"
     search_url = f"https://www.google.com/search?q={query}&tbm=isch"
 
     headers = {
@@ -16,10 +17,15 @@ def search_image_url(channel_name):
     response = requests.get(search_url, headers=headers)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, "lxml")
-        img_tag = soup.find("img")
-        if img_tag:
-            return img_tag["src"]
+        img_tags = soup.find_all("img")
+        
+        for img_tag in img_tags:
+            img_url = img_tag["src"]
+            if re.match(r'^https?://', img_url):
+                return img_url
+                
     return None
+
 
 def is_channel_working(url, headers=None):
     try:
@@ -91,11 +97,19 @@ with open("lista4.M3U", "w") as f:
         if "extm3u_line" in channel:
             f.write(f"{channel['extm3u_line']}\n")
         else:
-            if "tvg-logo" not in channel['extinf_line']:
-                channel_name = channel['extinf_line'].split(',', 1)[1].strip()
+            extinf_line_parts = channel['extinf_line'].split(',', 1)
+            channel_info = extinf_line_parts[0].strip()
+            channel_name = extinf_line_parts[1].strip()
+
+            if "tvg-logo" not in channel_info or 'tvg-logo=""' in channel_info:
                 image_url = search_image_url(channel_name)
                 if image_url:
-                    channel['extinf_line'] = f'{channel["extinf_line"][:-1]} tvg-logo="{image_url}",{channel_name}'
+                    if "tvg-logo" not in channel_info:
+                        channel_info += f' tvg-logo="{image_url}"'
+                    else:
+                        channel_info = channel_info.replace('tvg-logo=""', f'tvg-logo="{image_url}"')
+
+            channel['extinf_line'] = f"{channel_info},{channel_name}"
 
             f.write(f"{channel['extinf_line']}\n")
             if channel['extvlcopt_line']:
@@ -104,5 +118,3 @@ with open("lista4.M3U", "w") as f:
                 f.write(f"{kodiprop_line}\n")
             f.write(f"{channel['stream_url']}\n")
 
-            
-            
