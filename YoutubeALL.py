@@ -22,7 +22,7 @@ def is_channel_working(url, headers=None):
         return False
 
 repo_urls = [
-    "https://github.com/pendy99/iptv-epg/raw/main/iptv_channels_italy.m3u"
+    "https://github.com/punkstarbr/STR-YT/raw/main/REALITY'SLIVE.m3u"
 ]
 
 working_channels = []
