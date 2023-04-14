@@ -1,5 +1,24 @@
 import requests
 import subprocess
+import requests
+import subprocess
+import os
+from bs4 import BeautifulSoup
+
+def search_image_url(channel_name):
+    query = f"{channel_name} logo"
+    search_url = f"https://www.google.com/search?q={query}&tbm=isch"
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
+    }
+    response = requests.get(search_url, headers=headers)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, "lxml")
+        img_tag = soup.find("img")
+        if img_tag:
+            return img_tag["src"]
+    return None
 
 def is_channel_working(url, headers=None):
     try:
@@ -71,11 +90,18 @@ with open("lista4.M3U", "w") as f:
         if "extm3u_line" in channel:
             f.write(f"{channel['extm3u_line']}\n")
         else:
+            if "tvg-logo" not in channel['extinf_line']:
+                channel_name = channel['extinf_line'].split(',')[1].strip()
+                image_url = search_image_url(channel_name)
+                if image_url:
+                    channel['extinf_line'] = f'{channel["extinf_line"][:-1]} tvg-logo="{image_url}",'
+
             f.write(f"{channel['extinf_line']}\n")
             if channel['extvlcopt_line']:
                 f.write(f"{channel['extvlcopt_line']}\n")
             for kodiprop_line in channel['kodiprop_lines']:
                 f.write(f"{kodiprop_line}\n")
-            f.write(f"{channel['stream_url']}\n")          
+            f.write(f"{channel['stream_url']}\n")
+
             
             
