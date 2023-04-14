@@ -1,6 +1,6 @@
 import subprocess
 
-url = "https://www.bilibili.com/video/BV1qE411o7Zs/?spm_id_from=333.788.recommend_more_video.11"
+url = "https://www.bilibili.com/video/BV1qE411o7Zs"
 command = ["yt-dlp", "--get-title", url]
 result = subprocess.check_output(command, universal_newlines=True)
 
