@@ -16,7 +16,7 @@ def is_channel_working(url, headers=None):
             "-"
         ]
 
-        process = subprocess.run(cmd, stderr=subprocess.PIPE, universal_newlines=True, timeout=15)
+        process = subprocess.run(cmd, stderr=subprocess.PIPE, universal_newlines=True, timeout=30)
         return process.returncode == 0
     except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
         return False
