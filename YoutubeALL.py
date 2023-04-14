@@ -5,6 +5,7 @@ import subprocess
 import os
 from bs4 import BeautifulSoup
 import re
+
 def search_image_url(channel_name):
     query = f"{channel_name} logo filetype:png OR filetype:jpg"
     search_url = f"https://www.google.com/search?q={query}&tbm=isch"
