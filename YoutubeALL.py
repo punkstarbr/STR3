@@ -1,54 +1,62 @@
+import subprocess
+import os
+import yt_dlp
+import youtube_dl
 
-from requests import get
-from bs4 import BeautifulSoup
-import requests
-import random
-import re
+# Read the links from the YOUTUBEALL.txt file
+try:
+    with open('YOUTUBEALL.txt', 'r') as f:
+        links = [line.strip() for line in f.readlines()]
+except Exception as e:
+    print(f"Error reading the YOUTUBEALL.txt file: {e}")
+    links = []
 
-user_agent_list = [
-'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'
-'Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36'
-'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9'
-'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36'
-'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:94.0) Gecko/20100101 Firefox/94.0'
-]
+banner = r'''
+#EXTM3U x-tvg-url="https://iptv-org.github.io/epg/guides/ar/mi.tv.epg.xml"
+#EXTM3U x-tvg-url="https://raw.githubusercontent.com/mudstein/XML/main/TIZENsiptv.xml"
+#EXTM3U x-tvg-url="https://raw.githubusercontent.com/K-vanc/Tempest-EPG-Generator/main/Siteconfigs/Argentina/%5BENC%5D%5BEX%5Delcuatro.com_0.channel.xml"
+#EXTM3U x-tvg-url="https://raw.githubusercontent.com/Nicolas0919/Guia-EPG/master/GuiaEPG.xml"
+'''
 
-user_agent = random.choice(user_agent_list)
-headers = {'User-Agent': user_agent}
+# Install yt-dlp and youtube-dl
+subprocess.run(['pip', 'install', '--upgrade', 'yt-dlp'])
+subprocess.run(['pip', 'install', '--upgrade', 'youtube_dl'])
 
+# Define options for yt-dlp and youtube-dl
+ydl_opts = {
+    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',  # Get the best quality in mp4 format
+    'write_all_thumbnails': False,  # Don't download thumbnails
+    'skip_download': True,  # Don't download the video
+}
 
-def scrape_videos(url):
+# Get the playlist and write to file
+try:
+    with open('./LISTA5YTALL.m3u', 'w', encoding='utf-8') as f:
+        f.write("#EXTM3U\n")
+        f.write(banner)
+        for i, link in enumerate(links):
+            try:
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    info = ydl.extract_info(link, download=False, ie_key=None)
+            except Exception as e:
+                print(f"yt-dlp failed for link {link}: {e}")
+                print("Trying with youtube-dl...")
+                try:
+                    with youtube_dl.YoutubeDL(ydl_opts) as ydl_backup:
+                        info = ydl_backup.extract_info(link, download=False, ie_key=None)
+                except Exception as e_backup:
+                    print(f"youtube-dl failed for link {link}: {e_backup}")
+                    continue
 
-	req = requests.get(url)
-	send = BeautifulSoup(req.text, "html.parser")
-	search = send.find_all("script")
-	key = '"videoId":"'
-	data = re.findall(key + r"([^*]{11})", str(search))
-
-	return data
-
-if __name__ == "__main__":
-	url = str(input("Paste link: "))
-	name = str(input("Set name: "))
-	vid = scrape_videos(url)
-	vid = vid[::3]
-	vid = vid[:-1]
-
-
-	with open (name + ".m3u8", "a", encoding="utf-8") as files:
-		files.write(str('#EXTM3U' + '\n'))
-
-	for i, id in enumerate(vid, start = 1):
-		url = 'https://www.youtube.com/watch?v=' + id
-		print(url)
-		r = get(url).text
-		soup = BeautifulSoup(r, "html.parser")
-		tile = soup.title.string
-		title = tile[:len(tile)-10]
-
-		with open (name + ".m3u8", "a", encoding="utf-8") as files:
-			files.write(str('\n' + '#EXTINF:' + str(i) + ', ' + title + '\n' + 'https://www.youtube.com/watch?v=' + id + '\n'))
-print('Done)')
-	
-
-	
+            if 'url' not in info:
+                print(f"Error writing video information for {link}: 'url'")
+                continue
+            url = info['url']
+            thumbnail_url = info['thumbnail']
+            description = info.get('description', '')[:10]
+            title = info.get('title', '')
+            f.write(f"#EXTINF:-1 group-title=\"YOUTUBE & VIMEO\"  tvg-logo=\"{thumbnail_url}\",{title} - {description}...\n")
+            f.write(f"{url}\n")
+            f.write("\n")
+except Exception as e:
+    print(f"Error creating the .m3u file: {e}")
