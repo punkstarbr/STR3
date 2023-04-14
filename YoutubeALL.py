@@ -6,6 +6,8 @@ import os
 from bs4 import BeautifulSoup
 import re
 
+import re
+
 def search_image_url(channel_name):
     query = f"{channel_name} logo filetype:png OR filetype:jpg"
     search_url = f"https://www.google.com/search?q={query}&tbm=isch"
@@ -19,13 +21,12 @@ def search_image_url(channel_name):
         img_tags = soup.find_all("img")
         
         for img_tag in img_tags:
-            img_url = img_tag.get("src")
-            if not img_url:
-                img_url = img_tag.get("data-src")
-            if img_url and re.match(r'^https?://', img_url) and "gstatic.com" not in img_url:
+            img_url = img_tag["src"]
+            if re.match(r'^https?://', img_url):
                 return img_url
                 
     return None
+
 
 
 
