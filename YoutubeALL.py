@@ -11,9 +11,9 @@ ydl_opts = {
 # Create a YoutubeDL object with the options
 ydl = yt_dlp.YoutubeDL(ydl_opts)
 
-# Download the video
+# List the available formats for the video
 try:
     with ydl:
-        ydl.download(['https://vimeo.com/817420828'])
+        ydl.extract_info('https://vimeo.com/817420828', download=False)
 except yt_dlp.utils.DownloadError as e:
     print(f"yt-dlp failed for link https://vimeo.com/817420828: {e}")
