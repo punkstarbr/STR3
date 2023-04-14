@@ -13,5 +13,5 @@ for line in result.split("\n"):
         break
 
 # salvar informações em formato EXTINF
-with open("BILIBILI.m3u", "w") as f:
+with open("./BILIBILI.m3u", "w") as f:
     f.write(f"#EXTINF:{duration},{title}\n{url}")
