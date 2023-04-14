@@ -1,17 +1,19 @@
-import subprocess
+from selenium import webdriver
 
 url = "https://www.bilibili.com/video/BV1qE411o7Zs/?spm_id_from=333.788.recommend_more_video.11"
-command = ["youtube-dl", "-s", "--dump-json", url]
-result = subprocess.check_output(command, universal_newlines=True)
+driver = webdriver.Chrome()  # precisa do ChromeDriver instalado
 
-# extrair o título e a duração do vídeo
-for line in result.split("\n"):
-    if line.strip():
-        data = eval(line.strip())
-        title = data["title"]
-        duration = data["duration"]
-        break
+driver.get(url)
+
+# extrair o título do vídeo
+title = driver.find_element_by_class_name("video-title").text.strip()
+
+# extrair a duração do vídeo
+duration_tag = driver.find_element_by_css_selector("meta[itemprop='duration']")
+duration = int(duration_tag.get_attribute("content")) // 1000
+
+driver.quit()
 
 # salvar informações em formato EXTINF
-with open("./BILIBILI.m3u", "w") as f:
+with open("BILIBILI.m3u", "w") as f:
     f.write(f"#EXTINF:{duration},{title}\n{url}")
