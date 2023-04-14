@@ -76,7 +76,7 @@ for url in repo_urls:
 
                 for j in range(i + 1, len(m3u_lines)):
                     next_line = m3u_lines[j]
-                    
+
                     if next_line.startswith("#EXTVLCOPT"):
                         extvlcopt_line = next_line
                         if "http-user-agent" in extvlcopt_line:
@@ -89,13 +89,15 @@ for url in repo_urls:
                         break
 
                 if stream_url:
-                    if is_channel_working(stream_url, headers):
+                    should_add_channel = is_channel_working(stream_url, headers) or stream_url.startswith("https://video-auth") or stream_url.startswith("https://d1zx6l1dn8vaj5.cloudfront.net/out/v1/b89cc37caa6d418eb423cf092a2ef970")
+                    if should_add_channel:
                         working_channels.append({
                             "extinf_line": extinf_line,
                             "extvlcopt_line": extvlcopt_line,
                             "kodiprop_lines": kodiprop_lines,
                             "stream_url": stream_url
                         })
+
 
 with open("lista4.M3U", "w") as f:
     for channel in working_channels:
