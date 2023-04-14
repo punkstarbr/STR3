@@ -26,7 +26,7 @@ subprocess.run(['pip', 'install', '--upgrade', 'youtube_dl'])
 ydl_opts = {
     'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',  # Get the best quality in mp4 format
     'format': 'best',  # Obtém a melhor qualidade
-    'format': 'hls-akfire_interconnect_quic_sep-886 mp4 ',  # Seleciona o melhor formato de vídeo e áudio em HLS
+    'format': 'hls-fastly_skyfire_sep-485 ',  # Seleciona o melhor formato de vídeo e áudio em HLS
 
     'write_all_thumbnails': False,  # Don't download thumbnails
     'skip_download': True,  # Don't download the video
