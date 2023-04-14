@@ -32,6 +32,9 @@ jobs:
         run: pip install youtube-dl
 
 
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
       - name: Execute Python script
         run: | 
           python YoutubeALL.py
