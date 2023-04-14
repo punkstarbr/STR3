@@ -1,23 +1,15 @@
 import subprocess
-import time
 import os
-from selenium import webdriver
-from bs4 import BeautifulSoup
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
 import yt_dlp
+import youtube_dl
 
-
-from pytube import YouTube
-
-# Ler os links do arquivo LINKSYOUTUBE.txt
+# Read the links from the YOUTUBEALL.txt file
 try:
     with open('YOUTUBEALL.txt', 'r') as f:
         links = [line.strip() for line in f.readlines()]
 except Exception as e:
-    print(f"Erro ao ler o arquivo LINKSYOUTUBE.txt: {e}")
+    print(f"Error reading the YOUTUBEALL.txt file: {e}")
     links = []
-
 
 banner = r'''
 #EXTM3U x-tvg-url="https://iptv-org.github.io/epg/guides/ar/mi.tv.epg.xml"
@@ -26,21 +18,21 @@ banner = r'''
 #EXTM3U x-tvg-url="https://raw.githubusercontent.com/Nicolas0919/Guia-EPG/master/GuiaEPG.xml"
 '''
 
-# Instalando streamlink
+# Install yt-dlp and youtube-dl
+subprocess.run(['pip', 'install', '--upgrade', 'yt-dlp'])
+subprocess.run(['pip', 'install', '--upgrade', 'youtube_dl'])
 
-subprocess.run(['pip', 'install', 'pytube'])
-subprocess.run(['pip', 'install', '--upgrade', 'yt dlp'])
-
-time.sleep(5)
-from pytube import YouTube
-
-# Define as opções para o youtube-dl
+# Define options for yt-dlp and youtube-dl
 ydl_opts = {
+    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',  # Get the best quality in mp4 format
     'format': 'best',  # Obtém a melhor qualidade
 
+    'write_all_thumbnails': False,  # Don't download thumbnails
+    'skip_download': True,  # Don't download the video
     'write_all_thumbnails': False,  # Não faz download das thumbnails
     'skip_download': True,  # Não faz download do vídeo
 }
+
 
 # Get the playlist and write to file
 try:
@@ -51,18 +43,25 @@ try:
             try:
                 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                     info = ydl.extract_info(link, download=False)
-                if 'url' not in info:
-                    print(f"Erro ao gravar informações do vídeo {link}: 'url'")
-                    continue
-                url = info['url']
-                thumbnail_url = info['thumbnail']
-                description = info.get('description', '')[:10]
-                title = info.get('title', '')
-                f.write(f"#EXTINF:-1 group-title=\"YOUTUBE\" tvg-logo=\"{thumbnail_url}\",{title} - {description}...\n")
-                f.write(f"{url}\n")
-                f.write("\n")
             except Exception as e:
-                print(f"Erro ao processar o link {link}: {e}")
+                print(f"yt-dlp failed for link {link}: {e}")
+                print("Trying with youtube-dl...")
+                try:
+                    with youtube_dl.YoutubeDL(ydl_opts) as ydl_backup:
+                        info = ydl_backup.extract_info(link, download=False)
+                except Exception as e_backup:
+                    print(f"youtube-dl failed for link {link}: {e_backup}")
+                    continue
+
+            if 'url' not in info:
+                print(f"Error writing video information for {link}: 'url'")
                 continue
+            url = info['url']
+            thumbnail_url = info['thumbnail']
+            description = info.get('description', '')[:10]
+            title = info.get('title', '')
+            f.write(f"#EXTINF:-1 group-title=\"YOUTUBE\"  tvg-logo=\"{thumbnail_url}\",{title} - {description}...\n")
+            f.write(f"{url}\n")
+            f.write("\n")
 except Exception as e:
-    print(f"Erro ao criar o arquivo .m3u8: {e}")
+    print(f"Error creating the .m3u file: {e}")
