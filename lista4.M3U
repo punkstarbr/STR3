@@ -1,10 +1,17 @@
+#EXTINF:-1 group-title="PORTUGAL" tvg-id="sichd.tv.vodafone.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/SIC.png",SIC SEM VPN
+https://d1zx6l1dn8vaj5.cloudfront.net/out/v1/b89cc37caa6d418eb423cf092a2ef970/index_5.m3u8
+#EXTM3U
+#EXTINF:-1 group-title="PORTUGAL" tvg-id="sicnovelashd.tv.vodafone.pt" tvg-logo="https://cfvod.kaltura.com/p/4526593/sp/452659300/thumbnail/entry_id/1_5w7rptsp/width/0/height/0/quality/85/format/png32",SIC NOVELAS
+https://cdnapisec.kaltura.com/p/4526593/sp/4526593/playManifest/entryId/1_kfaion7y/deliveryProfileId/672/protocol/https/format/applehttp/a.m3u8
 #EXTM3U 
-#EXTINF:-1 group-title="Reality Show's Live"  tvg-logo="https://www.telemundo.com/sites/nbcutelemundo/files/styles/focal-860x484/public/images/promo/livestreams/2023/01/17/lcdlf2_espia_24horas_hd_0.png?ramen_itok=iqwQftIcTf",BIG BROTHER MÉXICO/USA
+#EXTINF:-1 group-title="Reality Show's Live"  tvg-logo="",BIG BROTHER MÉXICO/USA
 https://telemundolive.akamaized.net/hls/live/2093200/LCDLF/master_CAM1.m3u8
-#EXTINF:-1 group-title="Reality Show's Live"  tvg-logo="https://www.telemundo.com/sites/nbcutelemundo/files/styles/focal-860x484/public/images/promo/livestreams/2023/01/17/lcdlf2_espia_24horas_hd_0.png?ramen_itok=iqwQftIcTf",BIG BROTHER MÉXICO/USA
+#EXTINF:-1 group-title="Reality Show's Live",BIG BROTHER MÉXICO/US tvg-logo="https://fonts.gstatic.com/s/i/productlogos/lens_camera/v1/192px.svg",
 https://telemundolive.akamaized.net/hls/live/2093200/LCDLF/master_CAM2.m3u8
 #EXTINF:-1 group-title="Reality Show's Live"  tvg-logo="https://www.telemundo.com/sites/nbcutelemundo/files/styles/focal-860x484/public/images/promo/livestreams/2023/01/17/lcdlf2_espia_24horas_hd_0.png?ramen_itok=iqwQftIcTf",BIG BROTHER MÉXICO/USA
 https://telemundolive.akamaized.net/hls/live/2093200/LCDLF/master_CAM3.m3u8
+#EXTINF:-1 group-title="Reality Show's Live"  tvg-logo="https://www.iol.pt/multimedia/oratvi/multimedia/imagem/id/63ecfd7e0cf28f3e15cc3929/",O TRIANGULO - TVI
+https://video-auth6.iol.pt/live_tvi_reality/live_tvi_reality/edge_servers/tvireality-720_passthrough/chunks.m3u8
 #EXTINF:-1 tvg-id="" tvg-name="BBB 2023 - Principal" tvg-logo="https://observatoriodatv.uol.com.br/wp-content/uploads/2017/01/BIG-BROTHER-17.jpg" group-title="Reality Show's Live",BBB 2023 - Principal
 https://main.svrplus.xyz/EduServidorApp/AD@34DHRB5/99521?tkn=1672077517
 #EXTINF:-1 tvg-id="" tvg-name="BBB 2023 - Sala de estar" tvg-logo="https://observatoriodatv.uol.com.br/wp-content/uploads/2017/01/BIG-BROTHER-17.jpg" group-title="Reality Show's Live",BBB 2023 - Sala de estar
@@ -17,3 +24,5 @@ https://main.svrplus.xyz/EduServidorApp/AD@34DHRB5/99524?tkn=1672077517
 https://main.svrplus.xyz/EduServidorApp/AD@34DHRB5/99525?tkn=1672077517
 #EXTINF:-1 tvg-id="" tvg-name="BBB 2023 - Piscina " tvg-logo="https://observatoriodatv.uol.com.br/wp-content/uploads/2017/01/BIG-BROTHER-17.jpg" group-title="Reality Show's Live",BBB 2023 - Piscina
 https://main.svrplus.xyz/EduServidorApp/AD@34DHRB5/99526
+#EXTINF:-1 group-title="Reality Show's Live", Farma Sérvi tvg-logo="https://fonts.gstatic.com/s/i/productlogos/lens_camera/v1/192px.svg",
+http://bntvs.com:2052/zorankalauz/643095040/8753
