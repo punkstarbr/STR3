@@ -14,6 +14,9 @@ try:
         info = ydl.extract_info('https://vimeo.com/817420828', download=False)
         formats = info['formats']
         for f in formats:
-            print(f['format_id'], f['ext'], f['format_note'])
+            format_id = f.get('format_id', 'unknown')
+            ext = f.get('ext', 'unknown')
+            format_note = f.get('format_note', '')
+            print(format_id, ext, format_note)
 except youtube_dl.DownloadError as e:
     print(f"youtube-dl failed for link https://vimeo.com/817420828: {e}")
