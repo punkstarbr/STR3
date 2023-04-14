@@ -92,10 +92,10 @@ with open("lista4.M3U", "w") as f:
             f.write(f"{channel['extm3u_line']}\n")
         else:
             if "tvg-logo" not in channel['extinf_line']:
-                channel_name = channel['extinf_line'].split(',')[1].strip()
+                channel_name = channel['extinf_line'].split(',', 1)[1].strip()
                 image_url = search_image_url(channel_name)
                 if image_url:
-                    channel['extinf_line'] = f'{channel["extinf_line"][:-1]} tvg-logo="{image_url}",'
+                    channel['extinf_line'] = f'{channel["extinf_line"][:-1]} tvg-logo="{image_url}",{channel_name}'
 
             f.write(f"{channel['extinf_line']}\n")
             if channel['extvlcopt_line']:
