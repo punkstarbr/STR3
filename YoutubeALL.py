@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import re
 
 
+
 def search_image_url(channel_name):
     query = f"{channel_name} logo filetype:png OR filetype:jpg"
     search_url = f"https://www.google.com/search?q={query}&hl=pt-BR&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiYhte-nqn-AhXoHrkGHdt-D58Q_AUoAXoECAEQAw&biw=1600&bih=711&dpr=1"
