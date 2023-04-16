@@ -171,7 +171,7 @@ except Exception as e:
     print(f"Erro ao criar o arquivo .m3u8: {e}")
     
     
-# Define as opções para o youtube-dl
+# Define as opções para o yt-dlp
 ydl_opts = {
     'format': 'best',
     'write_all_thumbnails': False,
@@ -182,6 +182,7 @@ ydl_opts = {
         },
     },
 }
+
 # Get the playlist and write to file
 try:
     with open('./LISTA5YTALL.m3u', 'a', encoding='utf-8') as f:
@@ -189,9 +190,16 @@ try:
         for i, link in enumerate(links):
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(link, download=False)
+            
+            # Ignora transmissões ao vivo
+            if 'is_live' in info and info['is_live']:
+                print(f"Ignorando vídeo ao vivo: {link}")
+                continue
+
             if 'url' not in info:
                 print(f"Erro ao gravar informações do vídeo {link}: 'url'")
                 continue
+
             url = info['url']
             thumbnail_url = info['thumbnail']
             description = info.get('description', '')[:10]
@@ -201,7 +209,4 @@ try:
             f.write("\n")
 except Exception as e:
     print(f"Erro ao criar o arquivo .m3u8: {e}")
-    
-    
 
-    
