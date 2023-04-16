@@ -181,11 +181,6 @@ ydl_opts = {
             'skip_live': True,  # Ignora transmissões ao vivo
         },
     },
-    'postprocessors': [
-        {
-            'key': 'FFmpegMetadata'
-        }
-    ]
 }
 # Get the playlist and write to file
 try:
