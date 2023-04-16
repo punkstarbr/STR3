@@ -22,6 +22,9 @@ jobs:
       - name: Install Selenium
         run: pip install selenium
 
+      - name: Install Streamlink
+        run: pip install streamlink
+        
       - name: Install yt_dlp
         run: pip install yt_dlp
 
