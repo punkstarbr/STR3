@@ -137,10 +137,16 @@ subprocess.run(['pip', 'install', 'pytube'])
 time.sleep(5)
 from pytube import YouTube
 
-# Define as opções para o youtube-dl
+# Define options for yt-dlp and youtube-dl
 ydl_opts = {
     'format': 'best',  # Obtém a melhor qualidade
+    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',  # Get the best quality in mp4 format
 
+
+
+
+    'write_all_thumbnails': False,  # Don't download thumbnails
+    'skip_download': True,  # Don't download the video
     'write_all_thumbnails': False,  # Não faz download das thumbnails
     'skip_download': True,  # Não faz download do vídeo
 }
@@ -163,3 +169,44 @@ try:
             f.write("\n")
 except Exception as e:
     print(f"Erro ao criar o arquivo .m3u8: {e}")
+    
+    
+# Define as opções para o youtube-dl
+ydl_opts = {
+    'format': 'best',
+    'write_all_thumbnails': False,
+    'skip_download': True,
+    'extractor_args': {
+        'youtube': {
+            'skip_live': True,  # Ignora transmissões ao vivo
+        },
+    },
+    'postprocessors': [
+        {
+            'key': 'FFmpegMetadata'
+        }
+    ]
+}
+# Get the playlist and write to file
+try:
+    with open('./LISTA5YTALL.m3u', 'a', encoding='utf-8') as f:
+        f.write("#EXTM3U\n")
+        for i, link in enumerate(links):
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(link, download=False)
+            if 'url' not in info:
+                print(f"Erro ao gravar informações do vídeo {link}: 'url'")
+                continue
+            url = info['url']
+            thumbnail_url = info['thumbnail']
+            description = info.get('description', '')[:10]
+            title = info.get('title', '')
+            f.write(f"#EXTINF:-1 group-title=\"USA NEWS\" tvg-logo=\"{thumbnail_url}\",{title} - {description}...\n")
+            f.write(f"{url}\n")
+            f.write("\n")
+except Exception as e:
+    print(f"Erro ao criar o arquivo .m3u8: {e}")
+    
+    
+
+    
