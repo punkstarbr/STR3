@@ -2,7 +2,7 @@ name: Youtube ALL
 
 on:
   schedule:
-    - cron: '0 */1 * * *' # run every 1 hour
+    - cron: '0 */2 * * *' # run every 2 hours
   push:
     branches:
       - main
@@ -58,6 +58,12 @@ jobs:
 
       - name: Create temporary branch
         run: git checkout -b "temp-${{ steps.datetime.outputs.datetime }}"
+
+      - name: Push temporary branch to origin
+        run: git push origin "temp-${{ steps.datetime.outputs.datetime }}"
+
+      - name: Reset working branch
+        run: git reset --hard origin/"temp-${{ steps.datetime.outputs.datetime }}"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
