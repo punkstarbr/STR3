@@ -174,7 +174,7 @@ except Exception as e:
 
 # Define options for yt-dlp and youtube-dl
 ydl_opts = {
-    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',  # Get the best quality in mp4 format
+    'format': 'best',  # Get the best quality in mp4 format
     'write_all_thumbnails': False,  # Don't download thumbnails
     'skip_download': True,  # Don't download the video
 }
