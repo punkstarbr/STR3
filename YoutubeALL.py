@@ -242,7 +242,7 @@ def generate_playlist(url_youtube):
         print(f"Erro ao criar o arquivo .m3u8: {e}")
 
 url_youtube1 = "https://www.youtube.com/results?search_query=noticiero&sp=CAISBBABGAI%253D"
-url_youtube2 = "https://www.youtube.com/results?search_query=DIRETTA+DALLA&sp=CAISAhgC"
+url_youtube2 = "https://www.youtube.com/results?search_query=telegiornale&sp=CAI%253D"
 
 generate_playlist(url_youtube1)
 generate_playlist(url_youtube2)
