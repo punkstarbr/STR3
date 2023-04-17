@@ -1,9 +1,8 @@
 name: Youtube ALL
 
-
 on:
   schedule:
-    - cron: '0 */1 * * *' # run every 1 hour
+    - cron: '0 */2 * * *' # Run every 2 hours
   push:
     branches:
       - main
@@ -14,67 +13,59 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Check out repository
       - uses: actions/checkout@v2
 
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      # Cache Python packages
+      - name: Cache pip packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # Install Python packages
       - name: Install Python packages
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Install Selenium
-        run: pip install selenium
 
-      - name: Install Streamlink
-        run: pip install streamlink
-        
-      - name: Install yt_dlp
-        run: pip install yt_dlp
+      # Install additional packages
+      - name: Install additional packages
+        run: |
+          pip install selenium streamlink yt_dlp pytube youtube-dl beautifulsoup4 lxml
 
-      - name: Install pytube
-        run: pip install pytube
-
-      - name: Install youtube-dl
-        run: pip install youtube-dl
-
-      - name: Install pip install beautifulsoup4
-        run: pip install beautifulsoup4
-      
-      - name: Install pip install lxml
-        run: pip install lxml
-
+      # Install ffmpeg
       - name: Install ffmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
+      # Execute Python script
       - name: Execute Python script
-        run: | 
-          python YoutubeALL.py
+        run: python YoutubeALL.py
+
+      # Commit files
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
           git commit -m "Update data" -a
-      - name: Get current date and time
-        id: datetime
-        run: echo "::set-output name=datetime::$(date '+%Y-%m-%d-%H-%M-%S')"
 
-      - name: Create temporary branch
-        run: git checkout -b "temp-${{ steps.datetime.outputs.datetime }}"
+      # Get current date
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date '+%Y-%m-%d')"
 
-      - name: Push temporary branch to origin
-        run: git push origin "temp-${{ steps.datetime.outputs.datetime }}"
-
-      - name: Reset working branch
-        run: git reset --hard origin/"temp-${{ steps.datetime.outputs.datetime }}"
-
+      # Push changes
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "temp-${{ steps.datetime.outputs.datetime }}"
-
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Update data: ${{ steps.datetime.outputs.datetime }}"
-          base: main
+          branch: main
