@@ -9,7 +9,7 @@ channels = [
 ]
 
 # Defina a pasta de destino
-dest_folder = '/content/drive/MyDrive/HOJE/QUINTA/'
+dest_folder = '/.m3u'
 
 # Defina as opções para o youtube_dl
 ydl_opts = {
