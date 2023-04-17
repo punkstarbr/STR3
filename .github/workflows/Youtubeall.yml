@@ -2,7 +2,7 @@ name: Youtube ALL
 
 on:
   schedule:
-    - cron: '0 */2 * * *' # run every 2 hours
+    - cron: '0 */1 * * *' # run every 2 hours
   push:
     branches:
       - main
@@ -46,20 +46,28 @@ jobs:
       - name: Execute Python script
         run: | 
           python YoutubeALL.py
-
-
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
           git commit -m "Update data" -a
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date '+%Y-%m-%d')"
+      - name: Get current date and time
+        id: datetime
+        run: echo "::set-output name=datetime::$(date '+%Y-%m-%d-%H-%M-%S')"
+
+      - name: Create temporary branch
+        run: git checkout -b "temp-${{ steps.datetime.outputs.datetime }}"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          branch: "temp-${{ steps.datetime.outputs.datetime }}"
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Update data: ${{ steps.datetime.outputs.datetime }}"
+          base: main
