@@ -193,7 +193,9 @@ try:
         for i, link in enumerate(links):
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(link, download=False)
-            if 'url' not in info:
+
+            # Verifica se não é uma transmissão ao vivo
+            if 'is_live' not in info or not info['is_live']:
                 print(f"Erro ao gravar informações do vídeo {link}: 'url'")
                 continue
             url = info['url']
