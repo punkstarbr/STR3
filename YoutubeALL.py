@@ -175,17 +175,10 @@ except Exception as e:
 # Define options for yt-dlp and youtube-dl
 ydl_opts = {
     'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',  # Get the best quality in mp4 format
-    'format': 'best',  # Obtém a melhor qualidade
-    
-
-
-
-
     'write_all_thumbnails': False,  # Don't download thumbnails
     'skip_download': True,  # Don't download the video
-    'write_all_thumbnails': False,  # Não faz download das thumbnails
-    'skip_download': True,  # Não faz download do vídeo
 }
+
 # Get the playlist and write to file
 try:
     with open('./LISTA5YTALL.m3u', 'a', encoding='utf-8') as f:
@@ -194,15 +187,18 @@ try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(link, download=False)
 
-        # Verifica se não é uma transmissão ao vivo
-        if 'is_live' not in info or not info['is_live']:
-            url = info['url']
-            thumbnail_url = info['thumbnail']
-            description = info.get('description', '')[:10]
-            title = info.get('title', '')
-            f.write(f"#EXTINF:-1 group-title=\"USA NEWS\" tvg-logo=\"{thumbnail_url}\",{title} - {description}...\n")
-            f.write(f"{url}\n")
-            f.write("\n")
-        else:
-            print(f"Vídeo ao vivo ignorado: {link}")
+            # Verifica se não é uma transmissão ao vivo
+            if 'is_live' not in info or not info['is_live']:
+                url = info['url']
+                thumbnail_url = info['thumbnail']
+                description = info.get('description', '')[:10]
+                title = info.get('title', '')
+                f.write(f"#EXTINF:-1 group-title=\"USA NEWS\" tvg-logo=\"{thumbnail_url}\",{title} - {description}...\n")
+                f.write(f"{url}\n")
+                f.write("\n")
+            else:
+                print(f"Vídeo ao vivo ignorado: {link}")
+except Exception as e:
+    print(f"Erro ao criar o arquivo .m3u: {e}")
+
 
