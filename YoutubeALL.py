@@ -194,10 +194,8 @@ try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(link, download=False)
 
-            # Verifica se não é uma transmissão ao vivo
-            if 'is_live' not in info or not info['is_live']:
-                print(f"Erro ao gravar informações do vídeo {link}: 'url'")
-                continue
+        # Verifica se não é uma transmissão ao vivo
+        if 'is_live' not in info or not info['is_live']:
             url = info['url']
             thumbnail_url = info['thumbnail']
             description = info.get('description', '')[:10]
@@ -205,5 +203,6 @@ try:
             f.write(f"#EXTINF:-1 group-title=\"USA NEWS\" tvg-logo=\"{thumbnail_url}\",{title} - {description}...\n")
             f.write(f"{url}\n")
             f.write("\n")
-except Exception as e:
-    print(f"Erro ao criar o arquivo .m3u8: {e}")
+        else:
+            print(f"Vídeo ao vivo ignorado: {link}")
+
