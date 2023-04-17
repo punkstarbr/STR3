@@ -171,18 +171,20 @@ except Exception as e:
     print(f"Erro ao criar o arquivo .m3u8: {e}")
     
     
-# Define as opções para o yt-dlp
-ydl_opts = {
-    'format': 'best',
-    'write_all_thumbnails': False,
-    'skip_download': True,
-    'extractor_args': {
-        'youtube': {
-            'skip_live': True,  # Ignora transmissões ao vivo
-        },
-    },
-}
 
+# Define options for yt-dlp and youtube-dl
+ydl_opts = {
+    'format': 'best',  # Obtém a melhor qualidade
+    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',  # Get the best quality in mp4 format
+
+
+
+
+    'write_all_thumbnails': False,  # Don't download thumbnails
+    'skip_download': True,  # Don't download the video
+    'write_all_thumbnails': False,  # Não faz download das thumbnails
+    'skip_download': True,  # Não faz download do vídeo
+}
 # Get the playlist and write to file
 try:
     with open('./LISTA5YTALL.m3u', 'a', encoding='utf-8') as f:
@@ -190,16 +192,9 @@ try:
         for i, link in enumerate(links):
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(link, download=False)
-            
-            # Ignora transmissões ao vivo
-            if 'is_live' in info and info['is_live']:
-                print(f"Ignorando vídeo ao vivo: {link}")
-                continue
-
             if 'url' not in info:
                 print(f"Erro ao gravar informações do vídeo {link}: 'url'")
                 continue
-
             url = info['url']
             thumbnail_url = info['thumbnail']
             description = info.get('description', '')[:10]
@@ -209,4 +204,3 @@ try:
             f.write("\n")
 except Exception as e:
     print(f"Erro ao criar o arquivo .m3u8: {e}")
-
