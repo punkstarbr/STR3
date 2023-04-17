@@ -243,10 +243,11 @@ def generate_playlist(url_youtube):
 
 url_youtube1 = "https://www.youtube.com/results?search_query=noticiero&sp=CAISBBABGAI%253D"
 url_youtube2 = "https://www.youtube.com/results?search_query=telegiornale&sp=CAI%253D"
+url_youtube3 = "https://www.youtube.com/results?search_query=telejornal&sp=CAISBBABGAI%253D"
 
 generate_playlist(url_youtube1)
 generate_playlist(url_youtube2)
-
+generate_playlist(url_youtube3)
 
 import subprocess
 import time
@@ -318,9 +319,10 @@ def generate_playlist(url_youtube):
     except Exception as e:
         print(f"Erro ao criar o arquivo .m3u8: {e}")
 
-url_youtube1 = "https://www.youtube.com/results?search_query=telejornal&sp=CAISBBABGAI%253D"
+
 url_youtube1 = "https://www.youtube.com/results?search_query=telemundo+noticiero&sp=CAISBhABGAIgAQ%253D%253D"
-url_youtube3 = "https://www.youtube.com/results?search_query=univision+vivo&sp=CAISAhAB"
+url_youtube2 = "https://www.youtube.com/results?search_query=univision+vivo&sp=CAISAhAB"
+url_youtube3 = "https://www.youtube.com/results?search_query=voz+de+am%C3%A9rica+noticias&sp=CAISBBABGAI%253D"
 
 generate_playlist(url_youtube1)
 generate_playlist(url_youtube2)
