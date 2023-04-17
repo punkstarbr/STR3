@@ -20,4 +20,4 @@ ydl = youtube_dl.YoutubeDL(ydl_opts)
 info_dict = ydl.extract_info(video_url, download=False)
 with open(output_file, 'w') as f:
     f.write('#EXTINF:-1,' + info_dict['title'] + '\n')
-    f.write(info_dict['url'] + '\n')
+    f.write(info_dict['formats'][0]['url'] + '\n')
