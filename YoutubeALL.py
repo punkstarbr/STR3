@@ -35,5 +35,16 @@ def generate_playlist(url):
 
     driver.quit()
 
+    log_entries = driver.execute_script("return window.performance.getEntries();")
+
+    link = ""
+    for entry in log_entries:
+        if ".m3u8" in entry['name']:
+            #print(entry['name'])
+            link = entry['name']
+            break
+
+    return link
+
 url = "https://bbbgratis.com/"
 generate_playlist(url)
