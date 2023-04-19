@@ -7,11 +7,16 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
 def display_screenshot(driver):
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
         driver.save_screenshot(tmpfile.name)
-        img = PILImage.open(tmpfile.name)
-        img.show()
+        img = mpimg.imread(tmpfile.name)
+        plt.imshow(img)
+        plt.show()
+
 
 def generate_playlist(url):
     chrome_options = Options()
