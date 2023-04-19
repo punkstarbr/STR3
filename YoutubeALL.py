@@ -50,5 +50,5 @@ def generate_playlist(url):
 
     driver.quit()
 
-url = "https://ghenvivo.com/"
+url = "https://ghenvivo.com/ghar"
 generate_playlist(url)
