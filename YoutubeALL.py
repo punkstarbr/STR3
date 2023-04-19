@@ -27,9 +27,6 @@ def extract_m3u8_link(driver):
 
     return links
 
-m3u8_links = extract_m3u8_link(driver)
-print(f"m3u8 links: {m3u8_links}")
-
 def generate_playlist(url):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -48,8 +45,8 @@ def generate_playlist(url):
     time.sleep(15)
     display_screenshot(driver, "MASTER", "screenshot2.png")
 
-    m3u8_link = extract_m3u8_link(webdriver)
-    print(f"m3u8 link: {m3u8_link}")
+    m3u8_links = extract_m3u8_link(driver)
+    print(f"m3u8 links: {m3u8_links}")
 
     driver.quit()
 
