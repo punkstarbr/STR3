@@ -42,8 +42,8 @@ def generate_playlist(url):
     time.sleep(15)
     display_screenshot(driver, "MASTER", "screenshot1.png")
 
-    button = driver.find_element(By.XPATH, '//a[contains(@class, "wp-block-button__link") and contains(text(), "ACOMPANHE A CASA")]')
-    ActionChains(driver).click(button).perform()
+    #button = driver.find_element(By.XPATH, '//a[contains(@class, "wp-block-button__link") and contains(text(), "ACOMPANHE A CASA")]')
+    #ActionChains(driver).click(button).perform()
 
     time.sleep(15)
     display_screenshot(driver, "MASTER", "screenshot2.png")
@@ -53,5 +53,5 @@ def generate_playlist(url):
 
     driver.quit()
 
-url = "https://bbbgratis.com/"
+url = "https://ghenvivo.com/bbb"
 generate_playlist(url)
