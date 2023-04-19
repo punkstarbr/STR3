@@ -1,22 +1,19 @@
 import os
 import time
-import tempfile
-from PIL import Image as PILImage
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
+def create_folder(folder_name):
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
 
-def display_screenshot(driver):
-    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
-        driver.save_screenshot(tmpfile.name)
-        img = mpimg.imread(tmpfile.name)
-        plt.imshow(img)
-        plt.show()
-
+def display_screenshot(driver, folder_name, filename):
+    create_folder(folder_name)
+    file_path = os.path.join(folder_name, filename)
+    driver.save_screenshot(file_path)
+    print(f"Screenshot saved as {file_path}")
 
 def generate_playlist(url):
     chrome_options = Options()
@@ -28,13 +25,13 @@ def generate_playlist(url):
     driver.get(url)
 
     time.sleep(15)
-    display_screenshot(driver)
+    display_screenshot(driver, "MASTER", "screenshot1.png")
 
     button = driver.find_element(By.XPATH, '//a[contains(@class, "wp-block-button__link") and contains(text(), "ACOMPANHE A CASA")]')
     ActionChains(driver).click(button).perform()
 
     time.sleep(15)
-    display_screenshot(driver)
+    display_screenshot(driver, "MASTER", "screenshot2.png")
 
     driver.quit()
 
