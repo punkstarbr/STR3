@@ -40,7 +40,7 @@ jobs:
       # Install additional packages
       - name: Install additional packages
         run: |
-          pip install selenium streamlink yt_dlp pytube youtube-dl beautifulsoup4 lxml --upgrade youtube_dl ipython
+          pip install selenium streamlink yt_dlp pytube youtube-dl beautifulsoup4 lxml --upgrade youtube_dl ipython Pillow
 
 
 
