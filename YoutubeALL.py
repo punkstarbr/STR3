@@ -1,17 +1,17 @@
 import os
 import time
 import tempfile
-from IPython.display import Image, display
+from PIL import Image as PILImage
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.common.action_chains import ActionChains
 
 def display_screenshot(driver):
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
         driver.save_screenshot(tmpfile.name)
-        display(Image(filename=tmpfile.name))
+        img = PILImage.open(tmpfile.name)
+        img.show()
 
 def generate_playlist(url):
     chrome_options = Options()
@@ -35,4 +35,3 @@ def generate_playlist(url):
 
 url = "https://bbbgratis.com/"
 generate_playlist(url)
-
