@@ -5,6 +5,8 @@ from IPython.display import Image, display
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+
 
 def display_screenshot(driver):
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
@@ -23,7 +25,7 @@ def generate_playlist(url):
     time.sleep(15)
     display_screenshot(driver)
 
-    button = driver.find_element_by_xpath('//a[contains(@class, "wp-block-button__link") and contains(text(), "ACOMPANHE A CASA")]')
+    button = driver.find_element(By.XPATH, '//a[contains(@class, "wp-block-button__link") and contains(text(), "ACOMPANHE A CASA")]')
     ActionChains(driver).click(button).perform()
 
     time.sleep(15)
