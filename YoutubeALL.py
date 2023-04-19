@@ -19,14 +19,16 @@ def extract_m3u8_link(driver):
     time.sleep(30)
     log_entries = driver.execute_script("return window.performance.getEntries();")
 
-    link = ""
+    links = []
     for entry in log_entries:
         if ".m3u8" in entry['name']:
             print(entry['name'])
-            link = entry['name']
-            break
+            links.append(entry['name'])
 
-    return link
+    return links
+
+m3u8_links = extract_m3u8_link(driver)
+print(f"m3u8 links: {m3u8_links}")
 
 def generate_playlist(url):
     chrome_options = Options()
