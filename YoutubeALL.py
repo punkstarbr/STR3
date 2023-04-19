@@ -15,6 +15,19 @@ def display_screenshot(driver, folder_name, filename):
     driver.save_screenshot(file_path)
     print(f"Screenshot saved as {file_path}")
 
+def extract_m3u8_link(driver):
+    time.sleep(30)
+    log_entries = driver.execute_script("return window.performance.getEntries();")
+
+    link = ""
+    for entry in log_entries:
+        if ".m3u8" in entry['name']:
+            print(entry['name'])
+            link = entry['name']
+            break
+
+    return link
+
 def generate_playlist(url):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -33,18 +46,10 @@ def generate_playlist(url):
     time.sleep(15)
     display_screenshot(driver, "MASTER", "screenshot2.png")
 
+    m3u8_link = extract_m3u8_link(driver)
+    print(f"m3u8 link: {m3u8_link}")
+
     driver.quit()
-
-    log_entries = driver.execute_script("return window.performance.getEntries();")
-
-    link = ""
-    for entry in log_entries:
-        if ".m3u8" in entry['name']:
-            print(entry['name'])
-            link = entry['name']
-            break
-
-    return link
 
 url = "https://bbbgratis.com/"
 generate_playlist(url)
