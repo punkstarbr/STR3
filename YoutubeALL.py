@@ -40,7 +40,7 @@ def generate_playlist(url):
     link = ""
     for entry in log_entries:
         if ".m3u8" in entry['name']:
-            #print(entry['name'])
+            print(entry['name'])
             link = entry['name']
             break
 
