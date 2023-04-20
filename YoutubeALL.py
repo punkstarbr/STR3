@@ -50,7 +50,7 @@ def generate_playlist(url):
 
     driver.quit()
 
-url = "https://www.google.com.br/"
+url = "https://www.rtp.pt/play/"
 generate_playlist(url)
 
 
